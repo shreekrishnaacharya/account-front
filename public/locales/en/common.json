@@ -1,0 +1,253 @@
+{
+  "pages": {
+    "login": {
+      "title": "Sign in to your account",
+      "signin": "Sign in",
+      "signup": "Sign up",
+      "divider": "or",
+      "fields": {
+        "email": "Email",
+        "password": "Password"
+      },
+      "errors": {
+        "validEmail": "Invalid email address"
+      },
+      "buttons": {
+        "submit": "Login",
+        "forgotPassword": "Forgot password?",
+        "noAccount": "Don’t have an account?",
+        "rememberMe": "Remember me"
+      }
+    },
+    "forgotPassword": {
+      "title": "Forgot your password?",
+      "fields": {
+        "email": "Email"
+      },
+      "errors": {
+        "validEmail": "Invalid email address"
+      },
+      "buttons": {
+        "submit": "Send reset instructions"
+      }
+    },
+    "register": {
+      "title": "Sign up for your account",
+      "fields": {
+        "email": "Email",
+        "password": "Password"
+      },
+      "errors": {
+        "validEmail": "Invalid email address"
+      },
+      "buttons": {
+        "submit": "Register",
+        "haveAccount": "Have an account?"
+      }
+    },
+    "updatePassword": {
+      "title": "Update password",
+      "fields": {
+        "password": "New Password",
+        "confirmPassword": "Confirm new password"
+      },
+      "errors": {
+        "confirmPasswordNotMatch": "Passwords do not match"
+      },
+      "buttons": {
+        "submit": "Update"
+      }
+    },
+    "error": {
+      "info": "You may have forgotten to add the {{action}} component to {{resource}} resource.",
+      "404": "Sorry, the page you visited does not exist.",
+      "resource404": "Are you sure you have created the {{resource}} resource.",
+      "backHome": "Back Home"
+    }
+  },
+  "actions": {
+    "list": "List",
+    "create": "Create",
+    "edit": "Edit",
+    "show": "Show"
+  },
+  "buttons": {
+    "create": "Create",
+    "save": "Save",
+    "logout": "Logout",
+    "delete": "Delete",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "confirm": "Are you sure?",
+    "filter": "Filter",
+    "clear": "Clear",
+    "refresh": "Refresh",
+    "show": "Show",
+    "undo": "Undo",
+    "import": "Import",
+    "clone": "Clone",
+    "notAccessTitle": "You don't have permission to access"
+  },
+  "warnWhenUnsavedChanges": "Are you sure you want to leave? You have unsaved changes.",
+  "notifications": {
+    "success": "Successful",
+    "error": "Error (status code: {{statusCode}})",
+    "undoable": "You have {{seconds}} seconds to undo",
+    "createSuccess": "Successfully created {{resource}}",
+    "createError": "There was an error creating {{resource}} (status code: {{statusCode}})",
+    "deleteSuccess": "Successfully deleted {{resource}}",
+    "deleteError": "Error when deleting {{resource}} (status code: {{statusCode}})",
+    "editSuccess": "Successfully edited {{resource}}",
+    "editError": "Error when editing {{resource}} (status code: {{statusCode}})",
+    "importProgress": "Importing: {{processed}}/{{total}}"
+  },
+  "loading": "Loading",
+  "tags": {
+    "clone": "Clone"
+  },
+  "dashboard": {
+    "title": "Dashboard"
+  },
+  "common": {
+    "by": "By",
+    "to": "To",
+    "account": "Account",
+    "dr": "DR",
+    "cr": "CR",
+    "action": "Action",
+    "total": "Total",
+    "voucher": "Voucher",
+    "isFixed": "Is Fixed",
+    "isNotFixed": "Is Not Fixed",
+    "id": "Id",
+    "title": "Title",
+    "name": "Name",
+    "code": "Code",
+    "status": "Status",
+    "bsHead": "BS Head",
+    "createdAt": "Created At",
+    "accountSide": "A/C",
+    "group": "Group",
+    "ledgerGroup": "Ledger Group",
+    "ledgerGroups": "Ledger Groups",
+    "ledgers": "Ledgers",
+    "ledger": "Ledger",
+    "bsType": "Bs Type",
+    "dateNp": "Date Np",
+    "dateEn": "Date En",
+    "fromDateNp": "From Date Np",
+    "fromDateEn": "From Date En",
+    "toDateNp": "To Date Np",
+    "toDateEn": "To Date En",
+    "bsHeadList": {
+      "fixed_assets": "Fixed Assets",
+      "current_assets": "Current Assets",
+      "current_liability": "Current Liability",
+      "loan_payable": "Loan Payable",
+      "reserve_and_surplus": "Reserve and Surplus",
+      "direct_income": "Direct Income",
+      "direct_expense": "Direct Expense",
+      "indirect_income": "Indirect Income",
+      "indirect_expense": "Indirect Expense"
+    }
+  },
+  "ledger_group": {
+    "ledger_group": "Ledger Group",
+    "fields": {
+      "id": "Id",
+      "name": "Name",
+      "status": "Status",
+      "isFixed": "Is Fixed",
+      "bsHead": "BS Head",
+      "createdAt": "Created At",
+      "accountSide": "A/C"
+    },
+    "titles": {
+      "create": "Create Ledger Group",
+      "edit": "Edit Ledger Group",
+      "list": "Ledger Group",
+      "show": "Show Ledger Group"
+    }
+  },
+  "ledger": {
+    "ledger": "Ledgers",
+    "fields": {
+      "id": "Id",
+      "name": "Name",
+      "code": "Code",
+      "status": "Status",
+      "isFixed": "Is Fixed",
+      "ledgerGroup": "Ledger Group",
+      "createdAt": "Created At"
+    },
+    "titles": {
+      "create": "Create Ledger",
+      "edit": "Edit Ledger",
+      "list": "Ledger"
+    }
+  },
+  "fiscalYear": {
+    "title": "Fiscal Year",
+    "fields": {
+      "id": "Id",
+      "name": "Name",
+      "openingNp": "Opening Np",
+      "openingEn": "Opening En",
+      "closingNp": "Closing Np",
+      "closingEn": "Closing En",
+      "isClosed": "Is Closed",
+      "status": "Status",
+      "billNo": "Bill No.",
+      "previousYear": "Previous Year"
+    },
+    "titles": {
+      "edit": "Edit Fiscal Year",
+      "list": "Fiscal Year"
+    }
+  },
+  "voucher": {
+    "title": "Voucher",
+    "journal": "Journal",
+    "purchase": "Purchase",
+    "receipt": "Receipt",
+    "payment": "Payment",
+    "contra": "Contra",
+    "fields": {
+      "id": "Id",
+      "name": "Name",
+      "openingNp": "Opening Np",
+      "openingEn": "Opening En",
+      "closingNp": "Closing Np",
+      "closingEn": "Closing En",
+      "isClosed": "Is Closed",
+      "status": "Status",
+      "billNo": "Bill No.",
+      "previousYear": "Previous Year"
+    },
+    "titles": {
+      "edit": "Edit Fiscal Year",
+      "list": "Fiscal Year"
+    }
+  },
+  "documentTitle": {
+    "default": "refine",
+    "suffix": " | refine",
+    "blog_posts": {
+      "list": "Blog Posts | refine",
+      "show": "#{{id}} Show Blog Post | refine",
+      "edit": "#{{id}} Edit Blog Post | refine",
+      "create": "Create new Blog Post | refine",
+      "clone": "#{{id}} Clone Blog Post | refine"
+    },
+    "categories": {
+      "list": "Categories | refine",
+      "show": "#{{id}} Show Category | refine",
+      "edit": "#{{id}} Edit Category | refine",
+      "create": "Create new Category | refine",
+      "clone": "#{{id}} Clone Category | refine"
+    }
+  },
+  "table": {
+    "actions": "Actions"
+  }
+}
