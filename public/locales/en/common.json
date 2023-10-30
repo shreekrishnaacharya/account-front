@@ -109,6 +109,7 @@
     "title": "Dashboard"
   },
   "common": {
+    "date": "Date",
     "by": "By",
     "to": "To",
     "account": "Account",
@@ -212,6 +213,7 @@
     "receipt": "Receipt",
     "payment": "Payment",
     "contra": "Contra",
+    "sales": "Sales",
     "fields": {
       "id": "Id",
       "name": "Name",

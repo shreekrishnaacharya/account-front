@@ -30,7 +30,7 @@ import { LedgerGroupList } from "pages/main/ledger-group";
 import { LedgerList } from "pages/main/ledger";
 import { axiosInstance } from "_service/axious";
 import { BASE_URL } from "common/options";
-import { ArrowLeftOutlined, ArrowRightOutlined, AuditOutlined, CalendarOutlined, DiffOutlined, FileTextOutlined, ProjectOutlined, RetweetOutlined, SettingOutlined, SwapOutlined, UnorderedListOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined, ArrowRightOutlined, AuditOutlined, CalendarOutlined, DiffOutlined, DollarOutlined, ExportOutlined, FileTextOutlined, ImportOutlined, ProjectOutlined, RetweetOutlined, SettingOutlined, SwapOutlined, UnorderedListOutlined } from "@ant-design/icons";
 import { JournalEntry } from "pages/main/voucher";
 import { FiscalYear } from "pages/main/fiscalyear";
 
@@ -67,7 +67,16 @@ function App() {
                   list: "voucher/purchase",
                   meta: {
                     label: t("voucher.purchase"),
-                    icon: <ArrowRightOutlined />,
+                    icon: <ImportOutlined />,
+                    parent: "vouchers",
+                  },
+                },
+                {
+                  name: "voucher/sales",
+                  list: "voucher/sales",
+                  meta: {
+                    label: t("voucher.sales"),
+                    icon: <ExportOutlined />,
                     parent: "vouchers",
                   },
                 },
@@ -162,8 +171,11 @@ function App() {
                     </Authenticated>
                   }
                 >
-                  <Route path="voucher/journal">
-                    <Route index element={<JournalEntry />} />
+                  <Route path="voucher">
+                    <Route path="journal" index element={<JournalEntry />} />
+                    <Route path="payment" index element={<JournalEntry multiCr={false} multiDr={false} />} />
+                    <Route path="purchase" index element={<JournalEntry multiCr={false} multiDr={true} />} />
+                    <Route path="contra" index element={<JournalEntry multiCr={false} multiDr={false} />} />
                   </Route>
                   <Route path="/ledger-group">
                     <Route index element={<LedgerGroupList />} />

@@ -11,7 +11,6 @@ export const axiosInstance: any = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-
     async (config: any) => {
         const accessToken = localStorage.getItem(TOKEN_KEY);
         if (accessToken && config?.headers) {

@@ -1,4 +1,4 @@
-import { DeleteOutlined, FileAddFilled, MailOutlined, PlusCircleOutlined, PlusOutlined, UserOutlined } from "@ant-design/icons";
+import { DeleteOutlined, MailOutlined, PlusCircleOutlined, PlusOutlined, UserOutlined } from "@ant-design/icons";
 import { useSelect } from "@refinedev/antd";
 import { useTranslate } from "@refinedev/core";
 import {
@@ -10,12 +10,15 @@ import {
     Table,
     Input,
     Space,
-    Button
+    Button,
+    Tag,
+    Divider
 } from "antd";
-import Column from "antd/es/table/Column";
+
+const { TextArea } = Input
 
 const { Title } = Typography;
-export default () => {
+export default ({ multiDr = true, multiCr = true }) => {
     const { selectProps: groupSelectProps } = useSelect({
         resource: "ledger",
         optionLabel: "name",
@@ -30,165 +33,152 @@ export default () => {
     });
     const t = useTranslate();
     return (
-        <div className="ant-table-wrapper">
-            <table style={{ width: "auto", minWidth: "100%", tableLayout: "auto" }}>
-                <thead className="ant-table-thead">
-                    <tr>
-                        <th style={{ width: "50%", textAlign: "center" }} aria-label={t("common.account")} className="ant-table-cell" tab-index={0} scope="col">
-                            <div className="ant-table-column-sorters">
-                                <span className="ant-table-column-title">{t("common.account")}</span>
-                            </div>
-                        </th>
-                        <th style={{ width: "20%", textAlign: "center" }} aria-label={t("common.account")} className="ant-table-cell" tab-index={0} scope="col">
-                            <div className="ant-table-column-sorters">
-                                <span className="ant-table-column-title">{t("common.dr")}</span>
-                            </div>
-                        </th>
-                        <th style={{ width: "20%", textAlign: "center" }} aria-label={t("common.account")} className="ant-table-cell" tab-index={0} scope="col">
-                            <div className="ant-table-column-sorters">
-                                <span className="ant-table-column-title">{t("common.cr")}</span>
-                            </div>
-                        </th>
-                        <th style={{ width: "10%", textAlign: "center" }} aria-label={t("common.account")} className="ant-table-cell" tab-index={0} scope="col">
-                            <div className="ant-table-column-sorters">
-                                <span className="ant-table-column-title">{t("common.action")}</span>
-                            </div>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <Form.List name="drEntry">
-                        {(fields, { add, remove }) => (
-                            <>
-                                <tr>
-                                    <td style={{ width: "50%" }} className="ant-table-cell" tab-index={0} scope="col">
+        <>
+            <div style={{ backgroundColor: "#eee", padding: "20px 20px 10px", borderTopLeftRadius: 20, borderTopRightRadius: 20 }} >
+                <Row gutter={[24, 20]} wrap>
+                    <Col span={14} >
+                        <Title level={5} >{t("common.account").toUpperCase()}</Title>
+                    </Col>
+                    <Col span={4}>
+                        <Title level={5}>{t("common.dr")}</Title>
+                    </Col>
+                    <Col span={4}>
+                        <Title level={5}>{t("common.cr")}</Title>
+                    </Col>
+                    <Col span={2}>
+                        <Title level={5}>{t("common.action").toUpperCase()}</Title>
+                    </Col>
+                </Row>
+            </div>
+            <div style={{ backgroundColor: "#18ff161c", padding: "20px 20px 0px" }} >
+                <Form.List name="drEntry" initialValue={[{}]}>
+                    {(fields, { add, remove }) => (
+                        <>
+                            {fields.map(({ key, name, ...restField }) => (
+                                <Row key={key} gutter={[24, 20]} wrap>
+                                    <Col span={14}>
                                         <Form.Item
                                             label={t("common.by")}
-                                            name="ledger_id"
-                                            style={{ textAlign: "left", padding: "0px 20px" }}
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                },
-                                            ]}
+                                            {...restField}
+                                            name={[name, "ledger_id"]}
                                         >
                                             <Select
                                                 {...groupSelectProps}
                                             />
                                         </Form.Item>
-                                    </td>
-                                    <td style={{ width: "20%", textAlign: "center" }} className="ant-table-cell" tab-index={0} scope="col">
+                                    </Col>
+                                    <Col span={4}>
                                         <Form.Item
-                                            name={"amount"}
-                                            style={{ textAlign: "left", padding: "0px 20px" }}
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                },
-                                            ]}
+                                            noStyle
+                                            name={[name, "amount"]}
                                         >
-                                            <Input />
+                                            <Input
+                                                addonBefore={"Rs"}
+                                                placeholder="Dr amount"
+                                                type="number"
+                                            />
                                         </Form.Item>
-                                    </td>
-                                    <td style={{ width: "20%", textAlign: "center" }} className="ant-table-cell" tab-index={0} scope="col">
-                                    </td>
-                                    <td style={{ width: "10%", textAlign: "center" }} className="ant-table-cell" tab-index={0} scope="col">
-                                        <Button
-                                            type="primary"
-                                            icon={<PlusOutlined />}
-                                            onClick={() => add()}
-                                        />
-                                    </td>
-                                </tr>
-                                {fields.map(({ key, name, ...restField }) => (
-                                    <Row key={key} gutter={12} align="middle">
-                                        <Col span={11}>
-                                            <Form.Item
-                                                noStyle
-                                                {...restField}
-                                                name={[name, "name"]}
-                                            >
-                                                <Input
-                                                    addonBefore={<UserOutlined />}
-                                                    placeholder="Contact name"
-                                                />
-                                            </Form.Item>
-                                        </Col>
-                                        <Col span={11}>
-                                            <Form.Item
-                                                noStyle
-                                                name={[name, "email"]}
-                                            >
-                                                <Input
-                                                    addonBefore={<MailOutlined />}
-                                                    placeholder="Contact email"
-                                                />
-                                            </Form.Item>
-                                        </Col>
-                                        <Col span={2}>
+                                    </Col>
+                                    <Col span={4}></Col>
+                                    <Col span={2} style={{ textAlign: "center" }}>
+                                        {(key === 0 && multiDr) ? (
+                                            <Button
+                                                type="primary"
+                                                icon={<PlusOutlined />}
+                                                onClick={() => add()}
+                                            />
+                                        ) : (
                                             <Button
                                                 type="primary"
                                                 danger
                                                 icon={<DeleteOutlined />}
                                                 onClick={() => remove(name)}
                                             />
-                                        </Col>
-                                    </Row>
-                                ))}
-                            </>
-                        )}
-                    </Form.List>
-                </tbody>
-            </table>
-            <Row gutter={[64, 0]} wrap color={"grey"}>
-                <Col xs={6} lg={16}>
-                    <Title level={5}>{t("common.account").toUpperCase()}</Title>
-                </Col>
-                <Col xs={6} lg={3}>
-                    <Title level={5}>{t("common.dr")}</Title>
-                </Col>
-                <Col xs={6} lg={3}>
-                    <Title level={5}>{t("common.cr")}</Title>
-                </Col>
-                <Col xs={6} lg={2}>
-                    <Title level={5}>{t("common.action").toUpperCase()}</Title>
-                </Col>
-            </Row>
-            <Row gutter={[64, 0]} wrap>
-                <Col xs={24} lg={16}>
-                    <Form.Item
-                        label={t("common.by")}
-                        name="ledger_id"
-                        rules={[
-                            {
-                                required: true,
-                            },
-                        ]}
-                    >
-                        <Select
-                            {...groupSelectProps}
-                        />
-                    </Form.Item>
-                </Col>
-            </Row>
-            <Row gutter={[64, 0]} wrap>
-                <Col xs={24} lg={16}>
-                    <Form.Item
-                        label={t("common.to")}
-                        name="ledger_id"
-                        rules={[
-                            {
-                                required: true,
-                            },
-                        ]}
-                    >
-                        <Select
-                            style={{ marginLeft: 50 }}
-                            {...groupSelectProps}
-                        />
-                    </Form.Item>
-                </Col>
-            </Row>
-        </div>
+                                        )}
+                                    </Col>
+                                </Row>
+                            ))}
+                        </>
+                    )}
+                </Form.List>
+            </div>
+            <div style={{ backgroundColor: "#1677ff1c", padding: "20px 20px 0px" }} >
+                <Form.List name="crEntry" initialValue={[{}]}>
+                    {(fields, { add, remove }) => (
+                        <>
+                            {fields.map(({ key, name, ...restField }) => (
+                                <Row key={key} gutter={[24, 20]} wrap>
+                                    <Col span={14}>
+                                        <Form.Item
+                                            label={t("common.to")}
+                                            {...restField}
+                                            name={[name, "ledger_id"]}
+                                        >
+                                            <Select
+                                                {...groupSelectProps}
+                                            />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col span={4}></Col>
+                                    <Col span={4}>
+                                        <Form.Item
+                                            noStyle
+                                            name={[name, "amount"]}
+                                        >
+                                            <Input
+                                                addonBefore={"Rs"}
+                                                placeholder="Cr amount"
+                                                type="number"
+                                            />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col span={2} style={{ textAlign: "center" }}>
+                                        {(key === 0 && multiCr) ? (
+                                            <Button
+                                                type="primary"
+                                                icon={<PlusOutlined />}
+                                                onClick={() => add()}
+                                            />
+                                        ) : (
+                                            <Button
+                                                type="primary"
+                                                danger
+                                                icon={<DeleteOutlined />}
+                                                onClick={() => remove(name)}
+                                            />
+                                        )}
+                                    </Col>
+                                </Row>
+                            ))}
+                        </>
+                    )}
+                </Form.List>
+            </div>
+            <div style={{ backgroundColor: "#5a4fff45", padding: "20px 20px 20px", borderBottomLeftRadius: 20, borderBottomRightRadius: 20 }} >
+                <Row gutter={[24, 20]} wrap >
+                    <Col span={14} >
+                        <Title level={5} >{t("common.total").toUpperCase()}</Title>
+                    </Col>
+                    <Col span={4}>
+                        <Input addonBefore={"Rs"} value={100} readOnly />
+                    </Col>
+                    <Col span={4}>
+                        <Input addonBefore={"Rs"} value={100} readOnly />
+                    </Col>
+                    <Col span={2}></Col>
+                </Row>
+                <Row gutter={[24, 20]} wrap style={{ marginTop: 20 }}>
+                    <Col span={24} >
+                        <Form.Item
+                            name={"narration"}
+                        >
+                            <TextArea rows={4}
+                                placeholder="Enter your narration here"
+                            />
+                        </Form.Item>
+                    </Col>
+                </Row>
+            </div>
+        </>
     )
 }
