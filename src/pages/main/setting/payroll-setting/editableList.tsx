@@ -10,12 +10,12 @@ import {
     TagField
 } from "@refinedev/antd";
 import { useTranslate } from "@refinedev/core";
-import { Table, Form, Space, Button, Input, Select, Modal, Spin } from "antd";
-import { ILedgerGroup } from "interfaces";
-import LedgerGroupForm from "./_form";
-import { IsFixed } from "common/options";
+import { Table, Form, Space, Button, Input, Select, Modal, Spin, Row, Col } from "antd";
+import { ILedger, IPayrollSetting } from "interfaces";
+import PayrollSettingForm from "./_form";
+import { useErrorParser } from "hooks";
 
-export const LedgerGroupList: React.FC = () => {
+export const PayrollList: React.FC = () => {
 
     const {
         tableProps,
@@ -25,23 +25,27 @@ export const LedgerGroupList: React.FC = () => {
         cancelButtonProps,
         sorter,
         editButtonProps,
-    } = useEditableTable<ILedgerGroup>();
+    } = useEditableTable<ILedger>({
+        meta: { customQuery: { ledger: true } }
+    });
     const t = useTranslate();
-    const { selectProps: bsHeadSelectProps } = useSelect({
-        resource: "ledger-group/bshead",
-        optionLabel: "label",
-        optionValue: "value"
+    const { selectProps: ledgerSelectProps } = useSelect({
+        resource: "ledger",
+        optionLabel: "name",
+        optionValue: "id"
     });
     const {
+        form,
+        mutationResult,
         modalProps: createModalProps,
         formProps: createFormProps,
         show: createModalShow,
         formLoading: createFormLoading,
-    } = useModalForm<ILedgerGroup>({
+    } = useModalForm<ILedger>({
         action: "create",
         syncWithLocation: true,
     });
-    // console.log(bsHeadSelectProps)
+    const errors = useErrorParser(form, mutationResult);
     return (
         <>
             <List
@@ -56,41 +60,21 @@ export const LedgerGroupList: React.FC = () => {
                         {...tableProps}
                         rowKey="id"
                     >
-                        {/* <Table.Column dataIndex="id" title="ID" /> */}
-                        <Table.Column<ILedgerGroup>
-                            dataIndex="name"
-                            title={t("ledger_group.fields.name")}
+                        <Table.Column<IPayrollSetting>
+                            dataIndex={["ledger", "name"]}
                             sorter={{ multiple: 2 }}
-                            defaultSortOrder={getDefaultSortOrder("name", sorter)}
+                            title={t("common.ledger")}
                             render={(value, record) => {
                                 if (isEditing(record.id)) {
                                     return (
                                         <Form.Item
-                                            name="name"
+                                            name="ledger_id"
                                             style={{ margin: 0 }}
-                                        >
-                                            <Input value={value} />
-                                        </Form.Item>
-                                    );
-                                }
-                                return <TextField value={value} />;
-                            }}
-                        />
-                        <Table.Column<ILedgerGroup>
-                            dataIndex="bs_head"
-                            title={t("ledger_group.fields.bsHead")}
-                            sorter={{ multiple: 2 }}
-                            render={(value, record) => {
-                                if (isEditing(record.id)) {
-                                    return (
-                                        <Form.Item
-                                            name="bs_head"
-                                            style={{ margin: 0 }}
-
+                                            initialValue={record.ledger_id}
                                         >
                                             <Select
-                                                {...bsHeadSelectProps}
-                                                value={{ value: record.bs_head, label: record.bs_head }}
+                                                {...ledgerSelectProps}
+                                                value={{ value: record.ledger_id, label: record.ledger.name }}
                                             />
                                         </Form.Item>
                                     );
@@ -98,29 +82,25 @@ export const LedgerGroupList: React.FC = () => {
                                 return <TextField value={value} />;
                             }}
                         />
-                        <Table.Column<ILedgerGroup>
-                            dataIndex="bs_type"
-                            title={t("common.bsType")}
-                            render={(value) => {
+                        <Table.Column<IPayrollSetting>
+                            dataIndex="max_amount"
+                            title={t("common.amount")}
+                            render={(value, record) => {
+                                if (isEditing(record.id)) {
+                                    return (
+                                        <Form.Item
+                                            name="max_amount"
+                                            style={{ margin: 0 }}
+                                            initialValue={record.max_amount}
+                                        >
+                                            <Input />
+                                        </Form.Item>
+                                    );
+                                }
                                 return <TextField value={value} />;
                             }}
                         />
-                        <Table.Column<ILedgerGroup>
-                            dataIndex="account_side"
-                            title={t("ledger_group.fields.accountSide")}
-                            render={(value) => {
-                                return <TextField value={value.toUpperCase()} />;
-                            }}
-                        />
-
-                        <Table.Column<ILedgerGroup>
-                            dataIndex="is_fixed"
-                            title={t("ledger_group.fields.isFixed")}
-                            render={(value) => {
-                                return <TagField color={value === IsFixed.FIXED ? "warning" : "success"} value={value} />;
-                            }}
-                        />
-                        <Table.Column<ILedgerGroup>
+                        <Table.Column<ILedger>
                             title="Actions"
                             dataIndex="actions"
                             render={(_, record) => {
@@ -141,9 +121,6 @@ export const LedgerGroupList: React.FC = () => {
                                         </Space>
                                     );
                                 }
-                                if (record.is_fixed === IsFixed.FIXED) {
-                                    return <></>
-                                }
                                 return (
                                     <EditButton
                                         {...editButtonProps(record.id)}
@@ -159,7 +136,20 @@ export const LedgerGroupList: React.FC = () => {
             <Modal {...createModalProps}>
                 <Spin spinning={createFormLoading}>
                     <Form {...createFormProps} layout="vertical">
-                        <LedgerGroupForm />
+                        <PayrollSettingForm />
+                        {errors.length > 0 && (
+                            <Row gutter={[24, 20]} wrap style={{ marginTop: 20 }}>
+                                <Col span={24} style={{ color: "red" }}>
+                                    <ul>
+                                        {
+                                            errors.map(e => {
+                                                return <li key={e}>{e}</li>
+                                            })
+                                        }
+                                    </ul>
+                                </Col>
+                            </Row>
+                        )}
                     </Form>
                 </Spin>
             </Modal>

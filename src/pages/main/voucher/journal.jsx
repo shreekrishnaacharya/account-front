@@ -11,16 +11,16 @@ import { useErrorParser, useNepaliDateConverter } from "hooks";
 export const JournalEntry = ({ multiDr = true, multiCr = true }) => {
     const t = useTranslate();
     const {
+        form,
         formProps,
         saveButtonProps,
         queryResult,
         mutationResult
     } = useForm({
-        action: "create",
         syncWithLocation: true,
     });
     const { nepaliDate, englishDate, handleNepaliDateChange, handleEnglishDateChange } = useNepaliDateConverter({ type: "en" });
-    const errors = useErrorParser(mutationResult.error?.response.data);
+    const errors = useErrorParser(form, mutationResult);
     return (
         <Card
             style={{
@@ -41,7 +41,7 @@ export const JournalEntry = ({ multiDr = true, multiCr = true }) => {
                                     name="transaction_date_en"
                                     initialValue={englishDate}
                                 >
-                                    <Input type={"date"} value={englishDate} onChange={handleEnglishDateChange} />
+                                    <Input type={"date"} value={englishDate} onChange={(e) => handleEnglishDateChange(e.target.value)} />
                                 </Form.Item>
                                 <Form.Item
                                     label={t("common.date")}
@@ -49,18 +49,18 @@ export const JournalEntry = ({ multiDr = true, multiCr = true }) => {
                                     initialValue={nepaliDate}
                                     noStyle
                                 >
-                                    <Input type="hidden" value={nepaliDate} onChange={handleNepaliDateChange} />
+                                    <Input type="hidden" value={nepaliDate} onChange={(e) => handleNepaliDateChange(e.target.value)} />
                                 </Form.Item>
                             </Col>
                         </Row>
                     </div>
                     <VoucherForm multiDr={multiDr} multiCr={multiCr} />
-                    {errors.message.length > 0 && (
+                    {errors.length > 0 && (
                         <Row gutter={[24, 20]} wrap style={{ marginTop: 20 }}>
                             <Col span={24} style={{ color: "red" }}>
                                 <ul>
                                     {
-                                        errors.message.map(e => {
+                                        errors.map(e => {
                                             return <li>{e}</li>
                                         })
                                     }

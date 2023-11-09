@@ -32,6 +32,7 @@ export default ({ multiDr = true, multiCr = true }) => {
         ],
     });
     const t = useTranslate();
+       
     return (
         <>
             <div style={{ backgroundColor: "#eee", padding: "20px 20px 10px", borderTopLeftRadius: 20, borderTopRightRadius: 20 }} >

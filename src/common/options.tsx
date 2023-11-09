@@ -18,6 +18,18 @@ export enum IsFixed {
     NOT_FIXED = "Not Fixed"
 }
 
+export enum Gender {
+    MALE = "Male",
+    FEMALE = "Female",
+    OTHER = "Other"
+}
+
+export enum EmploymentType {
+    CONTRACT = "Contract",
+    TEMPORARY = "Temporary",
+    FULL_TIME = "Full Time"
+  }
+
 export enum YesNo {
     YES = "Yes",
     NO = "No"
@@ -27,3 +39,10 @@ export enum Status {
     ACTIVE = "Active",
     INACTIVE = "Inactive"
 }
+
+export enum Marriage {
+    MARRIED = "Married",
+    UNMARRIED = "Unmarried"
+}
+
+export const PayrollType =[{ id: "plus", label: "Plus", value: "plus" }, { id: "minus", label: "Minus", value: "minus" }]

@@ -10,10 +10,11 @@ import {
     TagField
 } from "@refinedev/antd";
 import { useTranslate } from "@refinedev/core";
-import { Table, Form, Space, Button, Input, Select, Modal, Spin } from "antd";
+import { Table, Form, Space, Button, Input, Select, Modal, Spin, Row, Col } from "antd";
 import { ILedger } from "interfaces";
 import LedgerForm from "./_form";
 import { IsFixed } from "common/options";
+import { useErrorParser } from "hooks";
 
 export const LedgerList: React.FC = () => {
 
@@ -44,6 +45,8 @@ export const LedgerList: React.FC = () => {
         optionValue: "id"
     });
     const {
+        form,
+        mutationResult,
         modalProps: createModalProps,
         formProps: createFormProps,
         show: createModalShow,
@@ -52,6 +55,7 @@ export const LedgerList: React.FC = () => {
         action: "create",
         syncWithLocation: true,
     });
+    const errors = useErrorParser(form, mutationResult);
     return (
         <>
             <List
@@ -179,6 +183,19 @@ export const LedgerList: React.FC = () => {
                 <Spin spinning={createFormLoading}>
                     <Form {...createFormProps} layout="vertical">
                         <LedgerForm />
+                        {errors.length > 0 && (
+                            <Row gutter={[24, 20]} wrap style={{ marginTop: 20 }}>
+                                <Col span={24} style={{ color: "red" }}>
+                                    <ul>
+                                        {
+                                            errors.map(e => {
+                                                return <li key={e}>{e}</li>
+                                            })
+                                        }
+                                    </ul>
+                                </Col>
+                            </Row>
+                        )}
                     </Form>
                 </Spin>
             </Modal>

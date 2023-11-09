@@ -26,13 +26,16 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { authProvider } from "./authProvider";
 import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
-import { LedgerGroupList } from "pages/main/ledger-group";
-import { LedgerList } from "pages/main/ledger";
+import { LedgerGroupList } from "pages/main/setting/ledger-group";
+import { LedgerList } from "pages/main/setting/ledger";
 import { axiosInstance } from "_service/axious";
 import { BASE_URL } from "common/options";
-import { ArrowLeftOutlined, ArrowRightOutlined, AuditOutlined, CalendarOutlined, DiffOutlined, DollarOutlined, ExportOutlined, FileTextOutlined, ImportOutlined, ProjectOutlined, RetweetOutlined, SettingOutlined, SwapOutlined, UnorderedListOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined, AuditOutlined, CalendarOutlined, DollarOutlined, ExportOutlined, FileTextOutlined, ImportOutlined, RetweetOutlined, SettingOutlined, SwapOutlined, UnorderedListOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 import { JournalEntry } from "pages/main/voucher";
-import { FiscalYear } from "pages/main/fiscalyear";
+import { FiscalYear } from "pages/main/setting/fiscalyear";
+import { EmployeeCreate, EmployeeList, EmployeeShow } from "pages/main/employee";
+import { PayrollList } from "pages/main/setting/payroll-setting";
+import { EmployeeEdit } from "pages/main/employee/edit";
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -55,6 +58,17 @@ function App() {
               authProvider={authProvider}
               i18nProvider={i18nProvider}
               resources={[
+                {
+                  name: "employee",
+                  list: "/employee",
+                  create: "/employee/create",
+                  edit: "/employee/edit/:id",
+                  show: "/employee/show/:id",
+                  meta: {
+                    label: t("employee.title"),
+                    icon: <UsergroupAddOutlined />
+                  },
+                },
                 {
                   name: "voucher",
                   meta: {
@@ -140,6 +154,18 @@ function App() {
                   },
                 },
                 {
+                  name: "payroll-setting",
+                  list: "/payroll-setting",
+                  edit: "/payroll-setting/:id",
+                  create: "/payroll-setting",
+                  meta: {
+                    label: t('payrollSetting.title'),
+                    icon: <DollarOutlined />,
+                    canDelete: false,
+                    parent: "settings",
+                  },
+                },
+                {
                   name: "fiscal-year",
                   list: "/fiscal-year",
                   edit: "/fiscal-year/:id",
@@ -171,6 +197,21 @@ function App() {
                     </Authenticated>
                   }
                 >
+                  <Route path="employee">
+                    <Route index element={<EmployeeList />} />
+                    <Route
+                      path="create"
+                      element={<EmployeeCreate />}
+                    />
+                    <Route
+                      path="show/:id"
+                      element={<EmployeeShow />}
+                    />
+                    <Route
+                      path="edit/:id"
+                      element={<EmployeeEdit />}
+                    />
+                  </Route>
                   <Route path="voucher">
                     <Route path="journal" index element={<JournalEntry />} />
                     <Route path="payment" index element={<JournalEntry multiCr={false} multiDr={false} />} />
@@ -182,6 +223,9 @@ function App() {
                   </Route>
                   <Route path="/ledger">
                     <Route index element={<LedgerList />} />
+                  </Route>
+                  <Route path="/payroll-setting">
+                    <Route index element={<PayrollList />} />
                   </Route>
                   <Route path="/fiscal-year">
                     <Route index element={<FiscalYear />} />

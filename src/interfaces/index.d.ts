@@ -11,6 +11,7 @@ export interface ILedger {
     is_fixed: string;
 }
 
+
 export interface ILedgerGroup {
     id: string;
     name: string;
@@ -32,4 +33,42 @@ export interface IFiscalYear {
     is_active: string;
     bill_no: string;
     previous_year: string;
+}
+
+export interface IEmployee {
+    id: string;
+    img: string;
+    name: string;
+    gender: string;
+    married: string;
+    address1: string;
+    address2: string;
+    email: string;
+    phone1: string;
+    phone2: string;
+    type: string;
+    dob_np: string;
+    dob_en: string;
+    doj_np: string;
+    doj_en: string;
+    bank_no: string;
+    qualification: string;
+    status: string;
+}
+
+export interface IPayroll {
+    id: string;
+    ledger_id: string;
+    employee_id: string;
+    amount: number;
+    type: string
+    status: string;
+    ledger: ILedger
+}
+
+export interface IPayrollSetting {
+    id: string;
+    ledger: ILedger;
+    ledger_id: string;
+    max_amount: string
 }

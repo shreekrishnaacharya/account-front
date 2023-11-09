@@ -110,9 +110,13 @@
   },
   "common": {
     "date": "Date",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other",
     "by": "By",
     "to": "To",
     "account": "Account",
+    "amount": "Amount",
     "dr": "DR",
     "cr": "CR",
     "action": "Action",
@@ -125,6 +129,8 @@
     "name": "Name",
     "code": "Code",
     "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
     "bsHead": "BS Head",
     "createdAt": "Created At",
     "accountSide": "A/C",
@@ -133,6 +139,7 @@
     "ledgerGroups": "Ledger Groups",
     "ledgers": "Ledgers",
     "ledger": "Ledger",
+    "type": "Type",
     "bsType": "Bs Type",
     "dateNp": "Date Np",
     "dateEn": "Date En",
@@ -204,6 +211,69 @@
     "titles": {
       "edit": "Edit Fiscal Year",
       "list": "Fiscal Year"
+    }
+  },
+  "employee": {
+    "title": "Employee",
+    "fields": {
+      "id": "Id",
+      "name": "Name",
+      "dob_en": "Date Of Birth(En)",
+      "dob_np": "Date Of Birth(Np)",
+      "doj_en": "Date Of Join(En)",
+      "doj_np": "Date Of Join(Np)",
+      "email": "Email",
+      "marriage": "Marriage",
+      "phone1": "Phone 1",
+      "phone2": "Phone 2",
+      "gender": "Gender",
+      "address1": "Address 1",
+      "address2": "Address 2",
+      "type": "Type",
+      "bank_no": "Bank A/C",
+      "qualification": "Qualification",
+      "ledger_name": "Ledger Name",
+      "ledger_code": "Ledger Code",
+      "employment": "Employment Type",
+      "images": {
+        "description": "Add user picture",
+        "validation": "must be 480x480 px"
+      },
+      "status": "Status"
+    },
+    "titles": {
+      "edit": "Edit Employee",
+      "list": "Employee",
+      "show": "Show Employee",
+      "create": "Create Employee"
+    }
+  },
+  "payroll": {
+    "title": "Payroll",
+    "fields": {
+      "id": "Id",
+      "ledger": "Ledger",
+      "type": "Type",
+      "amount": "Amount",
+      "status": "Status"
+    },
+    "titles": {
+      "create": "Create Payroll",
+      "edit": "Edit Payroll",
+      "list": "Payroll List"
+    }
+  },
+  "payrollSetting": {
+    "title": "Payroll Setting",
+    "fields": {
+      "id": "Id",
+      "ledger": "Ledger",
+      "amount": "Amount"
+    },
+    "titles": {
+      "create": "Add Payroll Setting",
+      "edit": "Edit Payroll Setting",
+      "list": "Payroll Setting List"
     }
   },
   "voucher": {
