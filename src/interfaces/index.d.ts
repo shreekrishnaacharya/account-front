@@ -66,6 +66,16 @@ export interface IPayroll {
     ledger: ILedger
 }
 
+export interface IPayroll {
+    id: string;
+    ledger_id: string;
+    employee_id: string;
+    amount: number;
+    type: string
+    status: string;
+    ledger: ILedger
+}
+
 export interface IPayrollSetting {
     id: string;
     ledger: ILedger;

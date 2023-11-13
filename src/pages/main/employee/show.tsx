@@ -195,8 +195,8 @@ export const EmployeeShow: React.FC<IResourceComponentsProps> = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs={24}>
-                            <AnnualDeduction payrollResource={payrollResource} />
+                        <Col xs={10}>
+                            <AnnualDeduction employeeId={employee?.id} />
                         </Col>
                     </Row>
                 </Col>

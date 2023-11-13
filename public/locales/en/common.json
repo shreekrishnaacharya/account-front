@@ -263,6 +263,13 @@
       "list": "Payroll List"
     }
   },
+  "annualDeduction": {
+    "title": "Annual Deduction",
+    "fields": {},
+    "text": {
+      "total": "Total Annual Deduction"
+    }
+  },
   "payrollSetting": {
     "title": "Payroll Setting",
     "fields": {

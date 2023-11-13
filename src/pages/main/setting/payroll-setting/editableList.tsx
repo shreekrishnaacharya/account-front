@@ -7,7 +7,8 @@ import {
     useModalForm,
     useSelect,
     getDefaultSortOrder,
-    TagField
+    TagField,
+    DeleteButton
 } from "@refinedev/antd";
 import { useTranslate } from "@refinedev/core";
 import { Table, Form, Space, Button, Input, Select, Modal, Spin, Row, Col } from "antd";
@@ -122,11 +123,19 @@ export const PayrollList: React.FC = () => {
                                     );
                                 }
                                 return (
-                                    <EditButton
-                                        {...editButtonProps(record.id)}
-                                        hideText
-                                        size="small"
-                                    />
+                                    <>
+                                        <EditButton
+                                            {...editButtonProps(record.id)}
+                                            hideText
+                                            size="small"
+                                            style={{ margin: "0px 5px" }}
+                                        />
+                                        <DeleteButton
+                                            recordItemId={record.id}
+                                            hideText
+                                            size="small"
+                                        />
+                                    </>
                                 );
                             }}
                         />

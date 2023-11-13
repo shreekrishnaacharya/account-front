@@ -1,0 +1,49 @@
+ <>
+                                <Form.List naannualDeductionme="annualDeduction"
+                                // initialValue={[...Object.values(formState)]}
+                                >
+                                    {(_fields) => (
+                                        <>
+                                            {Object.values(formState).map(({ amount, ledger_id, ledger }: any, name: number) => <Row key={name}>
+                                                <Col sm={20} xl={11}><Typography.Text>{ledger}</Typography.Text></Col>
+                                                <Col sm={4} xl={1}>:</Col>
+                                                <Col sm={24} xl={12}>
+                                                    {isEditing ? (<>
+                                                        <Form.Item
+                                                            name={[name, `amount`]}
+                                                            noStyle
+                                                            initialValue={amount}
+                                                        >
+                                                            <Input type="number"
+                                                                onChange={(e) => {
+                                                                    setFormState(p => {
+                                                                        return {
+                                                                            ...p,
+                                                                            [ledger_id]: { ledger, ledger_id, amount: e.target.value }
+                                                                        }
+                                                                    })
+                                                                    console.log(amount, formState)
+                                                                }} />
+                                                        </Form.Item>
+                                                        <Form.Item
+                                                            name={[name, `ledger_id`]}
+                                                            initialValue={ledger_id}
+                                                            noStyle
+                                                            hidden
+                                                        >
+                                                            <Input />
+                                                        </Form.Item>
+                                                    </>) : <strong>Rs. {amount}</strong>}
+                                                </Col>
+                                            </Row>
+                                            )}
+                                        </>
+                                    )}
+                                </Form.List>
+                                <hr />
+                                <Row>
+                                    <Col sm={20} xl={11}><Typography.Text>{t('annualDeduction.text.total')}</Typography.Text></Col>
+                                    <Col sm={4} xl={1}>:</Col>
+                                    <Col sm={24} xl={12}><b> Rs. {annualDeduction?.data && annualDeduction.data.reduce((total: number, a: any) => total + a.amount, 0)}</b></Col>
+                                </Row>
+                            </>
