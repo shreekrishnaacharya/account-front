@@ -65,21 +65,7 @@ export const PayrollList: React.FC = () => {
                             dataIndex={["ledger", "name"]}
                             sorter={{ multiple: 2 }}
                             title={t("common.ledger")}
-                            render={(value, record) => {
-                                if (isEditing(record.id)) {
-                                    return (
-                                        <Form.Item
-                                            name="ledger_id"
-                                            style={{ margin: 0 }}
-                                            initialValue={record.ledger_id}
-                                        >
-                                            <Select
-                                                {...ledgerSelectProps}
-                                                value={{ value: record.ledger_id, label: record.ledger.name }}
-                                            />
-                                        </Form.Item>
-                                    );
-                                }
+                            render={(value) => {
                                 return <TextField value={value} />;
                             }}
                         />

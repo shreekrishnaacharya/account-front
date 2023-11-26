@@ -45,4 +45,19 @@ export enum Marriage {
     UNMARRIED = "Unmarried"
 }
 
+export enum LedgerTypes {
+    CASH = "Cash",
+    BANK = "Bank",
+    EMPLOYEE = "Employee",
+    SALARY = "Salary",
+    SALES = "Sales",
+    PAYROLL_ANNUAL_DEDUCTION = "Payroll annual deduction",
+    INCOME_TAX = "Income tax",
+    BONUS = "Bonus",
+    INTEREST = "Interest",
+    DEPRECATION = "Deprecation",
+    CREDITORS = "Creditors",
+    OTHER = "Other",
+  }
+
 export const PayrollType =[{ id: "plus", label: "Plus", value: "plus" }, { id: "minus", label: "Minus", value: "minus" }]

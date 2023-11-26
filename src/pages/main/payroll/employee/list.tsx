@@ -1,15 +1,9 @@
 import {
     useTranslate,
     IResourceComponentsProps,
-    useDelete,
     useNavigation,
 } from "@refinedev/core";
 import { List, ShowButton, TagField, useTable, EditButton } from "@refinedev/antd";
-import {
-    EditOutlined,
-    CloseCircleOutlined,
-    MoreOutlined,
-} from "@ant-design/icons";
 import { Table, Avatar, Dropdown, Menu, Space, Typography } from "antd";
 import { IEmployee } from "interfaces";
 import { Status } from "common/options";

@@ -30,12 +30,15 @@ import { LedgerGroupList } from "pages/main/setting/ledger-group";
 import { LedgerList } from "pages/main/setting/ledger";
 import { axiosInstance } from "_service/axious";
 import { BASE_URL } from "common/options";
-import { ArrowLeftOutlined, AuditOutlined, CalendarOutlined, DollarOutlined, ExportOutlined, FileTextOutlined, ImportOutlined, RetweetOutlined, SettingOutlined, SwapOutlined, UnorderedListOutlined, UsergroupAddOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined, AuditOutlined, CalendarOutlined, DollarOutlined, ExportOutlined, FileTextOutlined, ImportOutlined, RetweetOutlined, SettingOutlined, SolutionOutlined, SwapOutlined, UnorderedListOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 import { JournalEntry } from "pages/main/voucher";
 import { FiscalYear } from "pages/main/setting/fiscalyear";
-import { EmployeeCreate, EmployeeList, EmployeeShow } from "pages/main/employee";
+import { EmployeeCreate, EmployeeList, EmployeeShow } from "pages/main/payroll/employee";
 import { PayrollList } from "pages/main/setting/payroll-setting";
-import { EmployeeEdit } from "pages/main/employee/edit";
+import { EmployeeEdit } from "pages/main/payroll/employee/edit";
+import { PayrollPostList } from "pages/main/payroll/post/list";
+import { PayrollPostShow } from "pages/main/payroll/post/show";
+
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -59,6 +62,13 @@ function App() {
               i18nProvider={i18nProvider}
               resources={[
                 {
+                  name: "payroll",
+                  meta: {
+                    label: t('payroll.title'),
+                    icon: <DollarOutlined />,
+                  },
+                },
+                {
                   name: "employee",
                   list: "/employee",
                   create: "/employee/create",
@@ -66,7 +76,19 @@ function App() {
                   show: "/employee/show/:id",
                   meta: {
                     label: t("employee.title"),
-                    icon: <UsergroupAddOutlined />
+                    icon: <UsergroupAddOutlined />,
+                    parent: "payroll"
+                  },
+                },
+                {
+                  name: "payroll-post",
+                  list: "/payroll-post",
+                  show: "/payroll-post/show/:id",
+                  create: "/payroll-post/create",
+                  meta: {
+                    label: t("payrollPost.title"),
+                    icon: <SolutionOutlined />,
+                    parent: "payroll"
                   },
                 },
                 {
@@ -210,6 +232,19 @@ function App() {
                     <Route
                       path="edit/:id"
                       element={<EmployeeEdit />}
+                    />
+                  </Route>
+                  <Route path="payroll-post"
+                  element={
+                    <PayrollPostList>
+                        <Outlet />
+                    </PayrollPostList>
+                }
+                  >
+                    <Route index element={null} />
+                    <Route
+                      path="show/:id"
+                      element={<PayrollPostShow />}
                     />
                   </Route>
                   <Route path="voucher">

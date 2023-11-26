@@ -62,7 +62,7 @@ function FormList({ setFormState, formState, form }: any) {
 }
 
 
-export default ({ employeeId }: any) => {
+export default ({ employeeId, setUpdate }: any) => {
     const [formState, setFormState] = useState({});
     const [isEditing, setEditing] = useState(false);
     const { data: annualDeduction, isLoading } = useOne<any>({
@@ -77,6 +77,7 @@ export default ({ employeeId }: any) => {
         redirect: false,
         onMutationSuccess: () => {
             setEditing(false)
+            setUpdate()
         }
     });
 
@@ -95,7 +96,7 @@ export default ({ employeeId }: any) => {
 
     // console.log(annualDeduction)
     return (
-        <Card title={"Annual Deduction"}
+        <Card title={t("payroll.titles.annualDeduction")}
             extra={
                 isEditing ? (
                     <>
@@ -121,7 +122,7 @@ export default ({ employeeId }: any) => {
                 ><EditFilled /></Button>)
             }
         >
-            {isLoading && formLoading ? (
+            {isLoading ? (
                 <center><Spin /></center>
             ) : (
                 <Form {...formProps}>
@@ -144,7 +145,7 @@ export default ({ employeeId }: any) => {
                                 )}
                                 <hr />
                                 <Row>
-                                    <Col sm={20} xl={11}><Typography.Text>{t('annualDeduction.text.total')}</Typography.Text></Col>
+                                    <Col sm={20} xl={11}><Typography.Text>{t('payroll.titles.totalAnnual')}</Typography.Text></Col>
                                     <Col sm={4} xl={1}>:</Col>
                                     <Col sm={24} xl={12}><b> Rs. {annualDeduction?.data && annualDeduction.data.reduce((total: number, a: any) => total + a.amount, 0)}</b></Col>
                                 </Row>

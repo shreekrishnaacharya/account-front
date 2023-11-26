@@ -10,6 +10,7 @@ import {
     Input,
     Button
 } from "antd";
+import { LedgerTypes } from "common/options";
 
 const { Title } = Typography;
 export default () => {
@@ -17,6 +18,13 @@ export default () => {
         resource: "ledger",
         optionLabel: "name",
         optionValue: "id",
+        filters: [
+            {
+                field: "type",
+                operator: "eq",
+                value: LedgerTypes.SALARY
+            }
+        ]
     });
     const t = useTranslate();
 

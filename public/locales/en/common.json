@@ -109,6 +109,7 @@
     "title": "Dashboard"
   },
   "common": {
+    "sno": "SNO",
     "date": "Date",
     "male": "Male",
     "female": "Female",
@@ -258,16 +259,44 @@
       "status": "Status"
     },
     "titles": {
-      "create": "Create Payroll",
+      "create": "Add Payroll",
       "edit": "Edit Payroll",
-      "list": "Payroll List"
+      "list": "Payroll List",
+      "post": "Post",
+      "taxable": "Taxable",
+      "totalSalary": "Total Salary",
+      "taxableSalary": "Taxable Salary",
+      "taxAmount": "Income Tax",
+      "taxSummary": "Tax Summary",
+      "annualDeduction": "Annual Deduction",
+      "totalAnnual": "Total Annual Deduction",
+      "totalDeduction": "Total Deduction",
+      "grossSalary": "Gross Salary"
     }
   },
-  "annualDeduction": {
-    "title": "Annual Deduction",
-    "fields": {},
-    "text": {
-      "total": "Total Annual Deduction"
+  "payrollPost": {
+    "title": "Post",
+    "fields": {
+      "id": "Id",
+      "ledger": "Ledger",
+      "type": "Type",
+      "amount": "Amount",
+      "status": "Status"
+    },
+    "titles": {
+      "create": "Add Payroll",
+      "edit": "Edit Payroll",
+      "list": "Payroll List",
+      "post": "Post",
+      "taxable": "Taxable",
+      "totalSalary": "Total Salary",
+      "taxableSalary": "Taxable Salary",
+      "taxAmount": "Income Tax",
+      "taxSummary": "Tax Summary",
+      "annualDeduction": "Annual Deduction",
+      "totalAnnual": "Total Annual Deduction",
+      "totalDeduction": "Total Deduction",
+      "grossSalary": "Gross Salary"
     }
   },
   "payrollSetting": {

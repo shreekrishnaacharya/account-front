@@ -13,7 +13,7 @@ import { useTranslate } from "@refinedev/core";
 import { Table, Form, Space, Button, Input, Select, Modal, Spin, Row, Col } from "antd";
 import { ILedger } from "interfaces";
 import LedgerForm from "./_form";
-import { IsFixed } from "common/options";
+import { IsFixed, LedgerTypes } from "common/options";
 import { useErrorParser } from "hooks";
 
 export const LedgerList: React.FC = () => {
@@ -108,6 +108,31 @@ export const LedgerList: React.FC = () => {
                             }}
                         />
                         <Table.Column<ILedger>
+                            dataIndex={"type"}
+                            title={t("common.type")}
+                            render={(value, record) => {
+                                if (isEditing(record.id)) {
+                                    return (
+                                        <Form.Item
+                                            name="type"
+                                            style={{ margin: 0 }}
+
+                                        >
+                                            <Select
+                                                options={Object.values(LedgerTypes).map(e => {
+                                                    return {
+                                                        value: e,
+                                                        label: e
+                                                    }
+                                                })}
+                                            />
+                                        </Form.Item>
+                                    );
+                                }
+                                return <TextField value={value} />;
+                            }}
+                        />
+                        <Table.Column<ILedger>
                             dataIndex={["ledgerGroup", "name"]}
                             sorter={{ multiple: 2 }}
                             title={t("common.group")}
@@ -136,6 +161,7 @@ export const LedgerList: React.FC = () => {
                                 return <TextField value={value} />;
                             }}
                         />
+
                         <Table.Column<ILedger>
                             dataIndex="is_fixed"
                             title={t("common.isFixed")}

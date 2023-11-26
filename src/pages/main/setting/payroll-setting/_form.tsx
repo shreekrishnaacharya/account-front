@@ -7,10 +7,18 @@ import {
     Col,
     Select,
 } from "antd";
+import { LedgerTypes } from "common/options";
 
 export default () => {
     const { selectProps: ledgerSelectProps } = useSelect({
         resource: "ledger",
+        filters: [
+            {
+                field: "type",
+                operator: "eq",
+                value: LedgerTypes.PAYROLL_ANNUAL_DEDUCTION,
+            },
+        ],
         optionLabel: "name",
         optionValue: "id",
         onSearch: (value) => [

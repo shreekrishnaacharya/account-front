@@ -25,15 +25,21 @@ import { useErrorParser } from "hooks";
 import PayrollForm from "./_payroll"
 import EmployeeCard from "./_employeeCard"
 import AnnualDeduction from "./_annualDeduction"
+import Summary from "./_summary"
+import { useState } from "react";
 
 
 
 export const EmployeeShow: React.FC<IResourceComponentsProps> = () => {
-
+    const [dataUpdateTrack, setDataTrack] = useState(false)
     const { queryResult: employeeQueryResult } = useShow<IEmployee>();
     const employee = employeeQueryResult.data?.data;
     const payrollResource = "payroll/" + employee?.id
-
+    const setUpdate = () => {
+        setDataTrack(p => {
+            return !p
+        })
+    }
     const { tableProps,
         isEditing,
         formProps: editableFormProps,
@@ -43,7 +49,10 @@ export const EmployeeShow: React.FC<IResourceComponentsProps> = () => {
             resource: payrollResource,
             syncWithLocation: false,
             pagination: { pageSize: 100 },
-            meta: { customQuery: { ledger: true } }
+            meta: { customQuery: { ledger: true } },
+            onMutationSuccess: () => {
+                setUpdate()
+            }
         });
     const {
         form,
@@ -56,6 +65,9 @@ export const EmployeeShow: React.FC<IResourceComponentsProps> = () => {
         action: "create",
         resource: payrollResource,
         syncWithLocation: true,
+        onMutationSuccess: () => {
+            setUpdate()
+        }
     });
 
     const { selectProps: ledgerSelectProps } = useSelect({
@@ -95,21 +107,7 @@ export const EmployeeShow: React.FC<IResourceComponentsProps> = () => {
                                         <Table.Column<IPayroll>
                                             dataIndex={["ledger", "name"]}
                                             title={t("common.ledger")}
-                                            render={(value, record) => {
-                                                if (isEditing(record.id)) {
-                                                    return (
-                                                        <Form.Item
-                                                            name="ledger_id"
-                                                            style={{ margin: 0 }}
-                                                        // initialValue={}
-                                                        >
-                                                            <Select
-                                                                {...ledgerSelectProps}
-                                                                value={{ value: record.ledger_id, label: record.ledger.name }}
-                                                            />
-                                                        </Form.Item>
-                                                    );
-                                                }
+                                            render={(value) => {
                                                 return <TextField value={value} />;
                                             }}
                                         />
@@ -117,21 +115,7 @@ export const EmployeeShow: React.FC<IResourceComponentsProps> = () => {
                                             dataIndex={"type"}
                                             width={"15%"}
                                             title={t("common.type")}
-                                            render={(value, record) => {
-                                                if (isEditing(record.id)) {
-                                                    return (
-                                                        <Form.Item
-                                                            name="type"
-                                                            style={{ margin: 0 }}
-                                                            initialValue={record.type}
-                                                        >
-                                                            <Select
-                                                                value={{ value: record.type, label: record.type.toLocaleUpperCase() }}
-                                                                options={PayrollType}
-                                                            />
-                                                        </Form.Item>
-                                                    );
-                                                }
+                                            render={(value) => {
                                                 return <TextField value={value} />;
                                             }}
 
@@ -184,7 +168,7 @@ export const EmployeeShow: React.FC<IResourceComponentsProps> = () => {
                                                             hideText
                                                             size="small"
                                                         />
-                                                        <DeleteButton size="small" resource={payrollResource} style={{ marginLeft: 5 }} hideText recordItemId={record.id} />
+                                                        <DeleteButton onSuccess={() => setUpdate()} size="small" resource={payrollResource} style={{ marginLeft: 5 }} hideText recordItemId={record.id} />
                                                     </Space>
                                                 )
                                             }}
@@ -195,8 +179,11 @@ export const EmployeeShow: React.FC<IResourceComponentsProps> = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs={10}>
-                            <AnnualDeduction employeeId={employee?.id} />
+                        <Col xs={11}>
+                            <AnnualDeduction employeeId={employee?.id} setUpdate={setUpdate} />
+                        </Col>
+                        <Col xs={11} push={2}>
+                            <Summary employeeId={employee?.id} dataUpdateTrack={dataUpdateTrack} />
                         </Col>
                     </Row>
                 </Col>
@@ -205,7 +192,7 @@ export const EmployeeShow: React.FC<IResourceComponentsProps> = () => {
                 </Col>
             </Row>
 
-            <Modal {...createModalProps} title="Add Payroll">
+            <Modal {...createModalProps} title={t("payroll.titles.create")}>
                 <Spin spinning={createFormLoading}>
                     <Form {...createFormProps} layout="vertical">
                         <PayrollForm />

@@ -1,3 +1,4 @@
+import { DrCr } from "common/all.enum";
 import { Dayjs } from "dayjs";
 
 
@@ -81,4 +82,20 @@ export interface IPayrollSetting {
     ledger: ILedger;
     ledger_id: string;
     max_amount: string
+}
+
+export interface ISalaryVoucher {
+    dr_cr: DrCr,
+    ledger_id: string,
+    ledger: ILedger,
+    amount: number
+}
+
+export interface ISalaryPost {
+    employee: IEmployee,
+    employee_id: string,
+    plus: ISalaryVoucher[],
+    minus: ISalaryVoucher[],
+    plusTotal: number,
+    minusTotal: number
 }
