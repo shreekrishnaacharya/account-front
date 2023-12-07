@@ -37,6 +37,7 @@ export const FiscalYear: React.FC = () => {
                     <Table
                         {...tableProps}
                         rowKey="id"
+                        size="small"
                     >
                         <Table.Column<IFiscalYear>
                             dataIndex="name"

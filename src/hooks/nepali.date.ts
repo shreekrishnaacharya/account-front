@@ -3,7 +3,7 @@ import { useState } from 'react';
 import NepaliDate from '../common/nepalidate1'
 
 interface NepaliDateConverter {
-    defaultDate: string,
+    defaultDate?: string,
     type: "np" | "en"
 }
 
@@ -19,7 +19,10 @@ function toDate(date: string) {
     return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
 }
 
-export function useNepaliDateConverter({ defaultDate = toDateString(new Date()), type = "en" }: NepaliDateConverter) {
+export function useNepaliDateConverter({ defaultDate, type }: NepaliDateConverter) {
+    if (defaultDate == undefined) {
+        defaultDate = toDateString(new Date())
+    }
     const [error, setError] = useState("");
     let npdf = ""
     let endif = ""
@@ -41,7 +44,6 @@ export function useNepaliDateConverter({ defaultDate = toDateString(new Date()),
         }
         // setError("Invalid date")
     }
-    console.log(npdf, endif, "initial")
     const [nepaliDate, setNepaliDate] = useState(npdf);
     const [englishDate, setEnglishDate] = useState(endif);
 
@@ -53,8 +55,8 @@ export function useNepaliDateConverter({ defaultDate = toDateString(new Date()),
     }
 
     function convertEnglishToNepali(englishDate: any) {
-        const nepaliDate = new NepaliDate(new Date(englishDate));
-        const { year, month, date } = nepaliDate.getBS()
+        const _nepaliDate = new NepaliDate(new Date(englishDate));
+        const { year, month, date } = _nepaliDate.getBS()
         return `${year}-${(month.toString()).padStart(2, '0')}-${date.toString().padStart(2, '0')}`;
     }
 
@@ -62,7 +64,6 @@ export function useNepaliDateConverter({ defaultDate = toDateString(new Date()),
         try {
             setNepaliDate(e);
             setEnglishDate(convertNepaliToEnglish((e).toString()));
-            console.log(e, "nepali")
         } catch (err) {
             setNepaliDate(e);
             setEnglishDate("")
@@ -83,7 +84,7 @@ export function useNepaliDateConverter({ defaultDate = toDateString(new Date()),
             setError("Invalid date")
         }
     }
-    console.log(nepaliDate, englishDate, "final")
+    // console.log(nepaliDate, englishDate, "final")
     return {
         nepaliDate,
         englishDate,

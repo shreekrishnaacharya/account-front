@@ -59,6 +59,7 @@ export const LedgerGroupList: React.FC = () => {
                     <Table
                         {...tableProps}
                         rowKey="id"
+                        size="small"
                     >
                         {/* <Table.Column dataIndex="id" title="ID" /> */}
                         <Table.Column<ILedgerGroup>

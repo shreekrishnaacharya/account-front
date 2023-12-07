@@ -120,9 +120,10 @@ export const PayrollPostShow = () => {
                     columns={columns}
                     dataSource={minus}
                     pagination={false}
+                    
                     summary={(v) => {
                         return (
-                            <Table.Summary.Row  key={'footer'}>
+                            <Table.Summary.Row key={'footer'} style={{backgroundColor:"#f1f1f1"}}>
                                 <Table.Summary.Cell index={0}></Table.Summary.Cell>
                                 <Table.Summary.Cell index={1}><Title level={5}>{t('common.total')}</Title></Table.Summary.Cell>
                                 <Table.Summary.Cell index={2}><Title level={5}>{minusTotal}</Title></Table.Summary.Cell>

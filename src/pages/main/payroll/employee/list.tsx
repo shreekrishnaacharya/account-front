@@ -21,13 +21,14 @@ export const EmployeeList: React.FC<IResourceComponentsProps> = () => {
             <Table
                 {...tableProps}
                 rowKey="id"
+                size="small"
             >
                 <Table.Column
                     key="name"
                     title={t("employee.fields.name")}
                     render={(record) => (
                         <Space>
-                            <Avatar size={45} src={record.img} />
+                            <Avatar size={30} src={record.img} />
                             <Typography.Text style={{ wordBreak: "inherit" }}>
                                 {record.name}
                             </Typography.Text>
@@ -54,8 +55,8 @@ export const EmployeeList: React.FC<IResourceComponentsProps> = () => {
                     title={t("table.actions")}
                     render={(_, record) => (
                         <>
-                            <ShowButton  hideText recordItemId={record.id} />
-                            <EditButton style={{ marginLeft: 5 }} hideText recordItemId={record.id}/>
+                            <ShowButton  size="small" hideText recordItemId={record.id} />
+                            <EditButton size="small" style={{ marginLeft: 5 }} hideText recordItemId={record.id}/>
                         </>
                     )}
                 />

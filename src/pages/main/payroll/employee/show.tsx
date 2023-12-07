@@ -29,7 +29,6 @@ import Summary from "./_summary"
 import { useState } from "react";
 
 
-
 export const EmployeeShow: React.FC<IResourceComponentsProps> = () => {
     const [dataUpdateTrack, setDataTrack] = useState(false)
     const { queryResult: employeeQueryResult } = useShow<IEmployee>();

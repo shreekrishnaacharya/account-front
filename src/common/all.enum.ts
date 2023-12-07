@@ -64,7 +64,6 @@ export enum MonthList {
   MAGH = "Magh",
   FALGUN = "Falgun",
   CHAITRA = "Chaitra"
-
 }
 
 export enum PayrollType {

@@ -111,6 +111,7 @@
   "common": {
     "sno": "SNO",
     "date": "Date",
+    "post": "Post",
     "male": "Male",
     "female": "Female",
     "other": "Other",
@@ -268,7 +269,7 @@
       "taxableSalary": "Taxable Salary",
       "taxAmount": "Income Tax",
       "taxSummary": "Tax Summary",
-      "annualDeduction": "Annual Deduction",
+      "annualDeduction": "Annual Deduction Benefits",
       "totalAnnual": "Total Annual Deduction",
       "totalDeduction": "Total Deduction",
       "grossSalary": "Gross Salary"

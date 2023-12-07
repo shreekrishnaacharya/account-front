@@ -25,7 +25,7 @@ export default ({ employeeId, dataUpdateTrack }: any) => {
         <Card title={t("payroll.titles.taxSummary")}
         >
             {isLoading ? (
-                 <center><Spin /></center>
+                <center><Spin /></center>
             ) : (
                 <Space
                     direction="vertical"
@@ -58,7 +58,7 @@ export default ({ employeeId, dataUpdateTrack }: any) => {
                             <Row>
                                 <Col sm={20} xl={11}><Typography.Text>{t("payroll.titles.totalDeduction")}</Typography.Text></Col>
                                 <Col sm={4} xl={1}>:</Col>
-                                <Col sm={24} xl={12}><b> Rs. {annualDeduction?.data.totalDeduction}</b></Col>
+                                <Col sm={24} xl={12}><b> Rs. {annualDeduction?.data.totalDeduction}</b> (i.e.{annualDeduction?.data.taxAmount}+{annualDeduction?.data.totalDeduction - annualDeduction?.data.taxAmount})</Col>
                             </Row>
                             <Row>
                                 <Col sm={20} xl={11}><Typography.Text>{t("payroll.titles.grossSalary")}</Typography.Text></Col>

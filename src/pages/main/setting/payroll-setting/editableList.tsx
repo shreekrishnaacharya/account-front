@@ -60,6 +60,7 @@ export const PayrollList: React.FC = () => {
                     <Table
                         {...tableProps}
                         rowKey="id"
+                        size="small"
                     >
                         <Table.Column<IPayrollSetting>
                             dataIndex={["ledger", "name"]}
